@@ -1,0 +1,17 @@
+# Terraform working directories
+**/.terraform/*
+
+# Terraform state
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Sensitive files
+*.pem
+*.key
+terraform.tfvars
+
+# Terraform backups
+*.backup
+
