@@ -1,4 +1,5 @@
 
+# Updated through a feature branch to demonstrate Git version control and Pull Request workflow.
 terraform {
   required_version = ">= 1.5"
 
