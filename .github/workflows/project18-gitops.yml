@@ -1,0 +1,39 @@
+name: Project 18 GitOps Deployment
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'project-18-gitops/**'
+      - '.github/workflows/project18-gitops.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Terraform GitOps Deploy
+    runs-on: ubuntu-latest
+
+    environment: Production
+
+    defaults:
+      run:
+        working-directory: project-18-gitops
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
