@@ -1,0 +1,34 @@
+---
+- name: Install and configure Nginx web server
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start and enable Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy custom web page
+      copy:
+        content: |
+          <html>
+          <head><title>Project 15 - Ansible</title></head>
+          <body>
+            <h1>Nginx deployed successfully using Ansible!</h1>
+            <p>Automated configuration management works.</p>
+          </body>
+          </html>
+        dest: /var/www/html/index.html
+        mode: '0644'
+
